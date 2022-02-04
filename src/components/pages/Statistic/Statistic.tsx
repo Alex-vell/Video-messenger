@@ -1,37 +1,32 @@
-import React from "react";
-import {CallType} from "../../../redux/app-reducer";
+import React from 'react';
+import { converter } from '../../../utils/converter';
+import styles from './Statistic.module.scss';
 
 type StatisticsType = {
-    calls: Array<CallType>
-    statistics: any
-}
+  sumCalls: number;
+  averageDurationCalls: number;
+};
 
-export const Statistics: React.FC<StatisticsType> = ({calls, statistics}) => {
+export const Statistic: React.FC<StatisticsType> = ({
+  sumCalls,
+  averageDurationCalls,
+}) => {
+  // helper functions
+  const sumTime = converter(sumCalls);
+  const averageTime = converter(averageDurationCalls);
 
-    let milliseconds = parseInt((duration % 1000) / 100)
-    let seconds = parseInt((duration / 1000) % 60)
-    let minutes = parseInt((duration / (1000 * 60)) % 60)
-    let hours = parseInt((duration / (1000 * 60 * 60)) % 24);
-
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-    return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-
-    return (
-        <>
-            {
-                calls.map(c => (
-                    <div key={c.id}>
-                        <span> data: {c.data};</span><span> startTime: {c.startTime};</span><span> endTime: {c.endTime};</span><span> duration: {c.duration};</span>
-                    </div>
-                ))
-            }
-
-            <div>
-                <span> sumCalls: {statistics.sumCalls};</span><span> averageDurationCalls: {statistics.averageDurationCalls} ;</span>
-            </div>
-        </>
-    )
-}
+  return (
+    <>
+      <div className={styles.statsContainer}>
+        <span className={styles.span}>
+          Duration of all calls: {sumTime.hoursEdit}:{sumTime.minutesEdit}:
+          {sumTime.secondsEdit}
+        </span>
+        <span className={styles.span}>
+          Average call duration: {averageTime.hoursEdit}:{averageTime.minutesEdit}:
+          {averageTime.secondsEdit}
+        </span>
+      </div>
+    </>
+  );
+};

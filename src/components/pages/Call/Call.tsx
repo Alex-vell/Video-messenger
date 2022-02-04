@@ -1,37 +1,46 @@
-import React from "react";
-import {CallType} from "../../../redux/app-reducer";
+import React from 'react';
+import { converter } from '../../../utils/converter';
+import styles from './Call.module.scss';
 
 type StatisticsType = {
-    calls: Array<CallType>
-    statistics: any
-}
+  id: string;
+  data: string;
+  startTime: string;
+  endTime: string | number;
+  duration: number;
+  disabled: boolean;
+  removeCallCallback: (id: string) => void;
+};
 
-export const Statistics: React.FC<StatisticsType> = ({calls, statistics}) => {
+export const Call: React.FC<StatisticsType> = ({
+  id,
+  data,
+  startTime,
+  endTime,
+  duration,
+  disabled,
+  removeCallCallback,
+}) => {
+  const onClickHandler = () => {
+    removeCallCallback(id);
+  };
 
-    let milliseconds = parseInt((duration % 1000) / 100)
-    let seconds = parseInt((duration / 1000) % 60)
-    let minutes = parseInt((duration / (1000 * 60)) % 60)
-    let hours = parseInt((duration / (1000 * 60 * 60)) % 24);
+  // helper function
+  const time = converter(duration);
 
-    hours = (hours < 10) ? "0" + hours : hours;
-    minutes = (minutes < 10) ? "0" + minutes : minutes;
-    seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-    return hours + ":" + minutes + ":" + seconds + "." + milliseconds;
-
-    return (
-        <>
-            {
-                calls.map(c => (
-                    <div key={c.id}>
-                        <span> data: {c.data};</span><span> startTime: {c.startTime};</span><span> endTime: {c.endTime};</span><span> duration: {c.duration};</span>
-                    </div>
-                ))
-            }
-
-            <div>
-                <span> sumCalls: {statistics.sumCalls};</span><span> averageDurationCalls: {statistics.averageDurationCalls} ;</span>
-            </div>
-        </>
-    )
-}
+  const endTimeMod = endTime === 0 ? `${endTime}0:${endTime}0:${endTime}0` : endTime;
+  const durationMod = `${time.hoursEdit}: ${time.minutesEdit}: ${time.secondsEdit}`;
+  return (
+    <>
+      <div className={styles.callContainer} key={id}>
+        <span className={styles.span}> Date: {data}</span>
+        <span className={styles.span}> Start time: {startTime}</span>
+        <span className={styles.span}> End time: {endTimeMod}</span>
+        <span className={styles.span}> Duration: {durationMod}</span>
+        <button className={styles.button} onClick={onClickHandler} disabled={disabled}>
+          ×
+        </button>
+      </div>
+    </>
+  );
+};

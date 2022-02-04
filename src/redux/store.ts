@@ -1,15 +1,13 @@
-import {combineReducers, createStore} from "redux";
-import {appReducer} from "./app-reducer";
-
+import { combineReducers, createStore } from 'redux';
+import { appReducer } from './app-reducer';
 
 const rootReducer = combineReducers({
-    app: appReducer
-})
+  app: appReducer,
+});
 
+export type AppStateType = ReturnType<typeof rootReducer>;
 
-export type AppStateType = ReturnType<typeof rootReducer>
-
-export const store = createStore(rootReducer)
+export const store = createStore(rootReducer);
 
 // @ts-ignore
-window.store=store;
+window.store = store;

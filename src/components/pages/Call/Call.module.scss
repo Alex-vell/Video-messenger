@@ -1,40 +1,28 @@
-import React from "react";
-import {converter} from "../../../utils/converter";
+$textFontFamily: 'Hind Siliguri', sans-serif;
+$textColor: #a4aeb0;
 
+.callContainer {
+  margin: 10px;
 
-type StatisticsType = {
-    id: string
-    data: string,
-    startTime: string,
-    endTime: string,
-    duration: number
-    disabled: boolean
-    removeCallCallback: (id: string) => void
-}
-
-
-export const Call: React.FC<StatisticsType> = (
-    {
-        id, data, startTime, endTime,
-        duration, disabled, removeCallCallback
-    }) => {
-
-    const onClickHandler = () => {
-        removeCallCallback(id)
-    }
-
-    // helper function
-    const time = converter(duration)
-
-    return (
-        <>
-            <div key={id}>
-                <span> data: {data};</span>
-                <span> startTime: {startTime};</span>
-                <span> endTime: {endTime};</span>
-                <span> duration: {time.hoursEdit}: {time.minutesEdit}: {time.secondsEdit};</span>
-                <button onClick={onClickHandler} disabled={disabled}>x</button>
-            </div>
-        </>
-    )
+  .span {
+    margin: 10px;
+    font-family: $textFontFamily;
+    color: $textColor;
+  }
+  .button {
+    width: 20px;
+    height: 20px;
+    color: $textColor;
+    font-family: $textFontFamily;
+    background-color: #006b9b;
+    border: none;
+    font-size: 18px;
+    margin-right: 20px;
+  }
+  .button:disabled {
+    color: gray;
+    font-family: $textFontFamily;
+    font-size: 18px;
+    margin-right: 20px;
+  }
 }

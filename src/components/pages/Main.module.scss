@@ -1,43 +1,72 @@
-button {
-    margin: 0 20px 0 0;
-    width: 83px;
-}
+.appContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  margin-top: 50px;
 
-button#hangupButton {
-    margin: 0;
-}
-
-video {
-    --width: 45%;
-    /*width: var(--width);*/
-    width: 400px;
-    /*height: calc(var(--width) * 0.75);*/
-    height: 400px;
-    margin: 0 0 20px 0;
-    vertical-align: top;
-}
-
-video#localVideo {
-    margin: 0 20px 20px 0;
-}
-
-div.box {
-    margin: 1em;
-}
-
-@media screen and (max-width: 400px) {
-    button {
-        width: 83px;
-        margin: 0 11px 10px 0;
+  .videoBox {
+    .localVideo {
+      margin: 0 20px;
+      width: 480px;
+      height: 360px;
     }
 
-    video {
-        height: 90px;
-        margin: 0 0 10px 0;
-        /*width: calc(50% - 7px);*/
+    .remoteVideo {
+      margin: 0 20px;
+      width: 480px;
+      height: 360px;
     }
-    video#localVideo {
-        margin: 0 10px 20px 0;
+  }
+
+
+  .buttonBox {
+    margin: 20px auto;
+
+    .buttonCall {
+      margin: 10px 20px;
+      height: 50px;
+      width: 50px;
+      border-radius: 30px;
+      border: 1px solid white;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
     }
+    .buttonCall:disabled {
+      opacity: 0.5;
+    }
+
+    .buttonHangUp {
+      margin: 10px 20px;
+      height: 50px;
+      width: 50px;
+      border-radius: 30px;
+      border: 1px solid white;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+    .buttonHangUp:disabled {
+      opacity: 0.5;
+    }
+  }
+  .statsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 800px;
+    margin: 0 auto;
+
+    .callsBlock {
+      width: 700px;
+      margin: 20px auto;
+    }
+    .statsBlock {
+      width: 470px;
+      margin: 20px auto;
+    }
+  }
 
 }
