@@ -1,0 +1,40 @@
+import React from "react";
+import {converter} from "../../../utils/converter";
+
+
+type StatisticsType = {
+    id: string
+    data: string,
+    startTime: string,
+    endTime: string,
+    duration: number
+    disabled: boolean
+    removeCallCallback: (id: string) => void
+}
+
+
+export const Call: React.FC<StatisticsType> = (
+    {
+        id, data, startTime, endTime,
+        duration, disabled, removeCallCallback
+    }) => {
+
+    const onClickHandler = () => {
+        removeCallCallback(id)
+    }
+
+    // helper function
+    const time = converter(duration)
+
+    return (
+        <>
+            <div key={id}>
+                <span> data: {data};</span>
+                <span> startTime: {startTime};</span>
+                <span> endTime: {endTime};</span>
+                <span> duration: {time.hoursEdit}: {time.minutesEdit}: {time.secondsEdit};</span>
+                <button onClick={onClickHandler} disabled={disabled}>x</button>
+            </div>
+        </>
+    )
+}
