@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/Video-messenger/static/css/main.cbb998a7.css",
-    "main.js": "/Video-messenger/static/js/main.b2c22475.js",
+    "main.css": "/Video-messenger/static/css/main.c0e34225.css",
+    "main.js": "/Video-messenger/static/js/main.2d64e65a.js",
     "static/js/787.367488f2.chunk.js": "/Video-messenger/static/js/787.367488f2.chunk.js",
     "index.html": "/Video-messenger/index.html",
-    "main.cbb998a7.css.map": "/Video-messenger/static/css/main.cbb998a7.css.map",
-    "main.b2c22475.js.map": "/Video-messenger/static/js/main.b2c22475.js.map",
+    "main.c0e34225.css.map": "/Video-messenger/static/css/main.c0e34225.css.map",
+    "main.2d64e65a.js.map": "/Video-messenger/static/js/main.2d64e65a.js.map",
     "787.367488f2.chunk.js.map": "/Video-messenger/static/js/787.367488f2.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cbb998a7.css",
-    "static/js/main.b2c22475.js"
+    "static/css/main.c0e34225.css",
+    "static/js/main.2d64e65a.js"
   ]
 }
