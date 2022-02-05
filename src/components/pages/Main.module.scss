@@ -32,7 +32,9 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      color: rgba(255, 255, 255, 0);
     }
+
     .buttonCall:disabled {
       opacity: 0.5;
     }
@@ -46,12 +48,15 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      color: rgba(255, 255, 255, 0);
     }
+
     .buttonHangUp:disabled {
       opacity: 0.5;
     }
   }
-  .statsContainer{
+
+  .statsContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -63,6 +68,7 @@
       width: 700px;
       margin: 20px auto;
     }
+
     .statsBlock {
       width: 470px;
       margin: 20px auto;

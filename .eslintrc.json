@@ -32,10 +32,12 @@
     "no-magic-numbers": "off",
     "default-param-last": "off",
     "no-use-before-define": "off",
+    "no-underscore-dangle": "off",
     "no-multiple-empty-lines": [
       "error",
       {
-        "max": 1
+        "max": 1,
+        "maxBOF": 1
       }
     ],
     "@typescript-eslint/no-shadow": [
@@ -61,10 +63,12 @@
       }
     ],
     "prettier/prettier": "error",
+     "jsx-a11y/label-has-for": "off",
+     "jsx-a11y/label-has-associated-control": "off",
     "react/prop-types": 0,
     "react/display-name": "off",
     "react/react-in-jsx-scope": "off",
-    "react/destructuring-assignment": "error",
+    "react/destructuring-assignment": "off",
     "react/jsx-filename-extension": [
       1,
       {

@@ -50,10 +50,14 @@ export const appReducer = (
         ),
       };
 
-    case SUM_CALLS:
+    case SUM_CALLS: {
       const arr = state.calls.map(el => el.duration);
-      const sum = state.calls.reduce((sum, el) => sum + el.duration, 0);
-      const averageDuration = sum / (arr.length !== 0 ? arr.length : 1);
+      const startEl = 0;
+      const sum = state.calls.reduce((acc, el) => acc + el.duration, startEl);
+      const arrLengthNull = 0;
+      const arrLengthOne = 1;
+      const averageDuration =
+        sum / (arr.length !== arrLengthNull ? arr.length : arrLengthOne);
 
       return {
         ...state,
@@ -62,6 +66,7 @@ export const appReducer = (
           averageDurationCalls: averageDuration,
         },
       };
+    }
 
     case REMOVE_CALL:
       return {
@@ -74,55 +79,50 @@ export const appReducer = (
   }
 };
 
-//action
-export const startCallAC = (dateNowMsStart: number) => {
-  return {
+// action
+export const startCallAC = (dateNowMsStart: number) =>
+  ({
     type: START_CALL,
     dateNowMsStart,
-  } as const;
-};
-export const endCallAC = (id: string, endTime: string | number, dateNowMsEnd: number) => {
-  return {
+  } as const);
+export const endCallAC = (id: string, endTime: string | number, dateNowMsEnd: number) =>
+  ({
     type: END_CALL,
     payload: {
       id,
       endTime,
       dateNowMsEnd,
     },
-  } as const;
-};
+  } as const);
 
 export const setStatisticsAC = (
   duration: number,
   sumCalls: number,
   averageDurationCalls: number,
-) => {
-  return {
+) =>
+  ({
     type: SET_STATISTIC,
     payload: {
       duration,
       sumCalls,
       averageDurationCalls,
     },
-  } as const;
-};
+  } as const);
 
-export const sumCallsAC = () => {
-  return {
+export const sumCallsAC = () =>
+  ({
     type: SUM_CALLS,
-  } as const;
-};
+  } as const);
 
-export const removeCallAC = (id: string) => {
-  return {
+export const removeCallAC = (id: string) =>
+  ({
     type: REMOVE_CALL,
     payload: {
       id,
     },
-  } as const;
-};
+  } as const);
 
-//types
+// types
 
 export type InitialStateType = typeof initialState;
 export type CallType = {

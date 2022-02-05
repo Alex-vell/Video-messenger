@@ -1,7 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
-import styles from './Main.module.scss';
-import { Statistic } from './Statistic/Statistic';
+import React, { FC, useEffect, useRef, useState } from 'react';
+
 import { useDispatch, useSelector } from 'react-redux';
+
+import callImg from '../../assets/call.png';
+import hangUpImg from '../../assets/hangUp.png';
 import {
   CallType,
   endCallAC,
@@ -10,45 +12,49 @@ import {
   StatisticsType,
   sumCallsAC,
 } from '../../redux/app-reducer';
-import { Call } from './Call/Call';
-import { call, hangup, start } from '../../utils/rtcFunctions';
 import { AppStateType } from '../../redux/store';
-import callImg from './../../assets/call.png';
-import hangUpImg from './../../assets/hangUp.png';
+import { call, hangup, start } from '../../utils/rtcFunctions';
 
-export const Main = () => {
+import { Call } from './Call/Call';
+import styles from './Main.module.scss';
+import { Statistic } from './Statistic/Statistic';
+
+type MainType = {};
+
+export const Main: FC<MainType> = () => {
   const calls = useSelector<AppStateType, Array<CallType>>(state => state.app.calls);
   const statistics = useSelector<AppStateType, StatisticsType>(
     state => state.app.statistics,
   );
-
   const [disabledCall, setDisabledCall] = useState(false);
   const [disabledHangup, setDisabledHangup] = useState(true);
 
   const dispatch = useDispatch();
 
-  let localVideoRef = useRef(null);
-  let remoteVideoRef = useRef(null);
-  let localStream = useRef(null);
+  const localVideoRef = useRef(null);
+  const remoteVideoRef = useRef(null);
+  const localStream = useRef(null);
 
   useEffect(() => {
-    start(localVideoRef, localStream).then()
+    start(localVideoRef, localStream).then();
   }, []);
 
-  const removeCall = (id: string) => {
+  const removeCall = (id: string): any => {
     dispatch(removeCallAC(id));
     dispatch(sumCallsAC());
   };
-  const onClickHandlerCall = () => {
+  const onClickHandlerCall = (): any => {
     dispatch(startCallAC(Date.now()));
     setDisabledCall(true);
     setDisabledHangup(false);
 
     return call(localStream, remoteVideoRef);
   };
-  const onClickHandlerHandUp = () => {
-    const currentCall = calls.filter(el => el.duration === 0);
-    const endId = currentCall[0].id;
+  const onClickHandlerHandUp = (): any => {
+    const firstElArray = 0;
+    const durationNull = 0;
+    const currentCall = calls.filter(el => el.duration === durationNull);
+    const endId = currentCall[firstElArray].id;
 
     dispatch(endCallAC(endId, new Date().toLocaleTimeString(), Date.now()));
     dispatch(sumCallsAC());
@@ -74,6 +80,7 @@ export const Main = () => {
           playsInline
           preload="metadata"
           autoPlay
+          muted
           ref={localVideoRef}
         />
         <video
@@ -81,6 +88,7 @@ export const Main = () => {
           playsInline
           preload="metadata"
           autoPlay
+          muted
           ref={remoteVideoRef}
         />
       </div>
@@ -88,28 +96,34 @@ export const Main = () => {
       <div className={styles.buttonBox}>
         <button
           className={styles.buttonCall}
+          type="button"
           onClick={onClickHandlerCall}
           style={callIMG}
           disabled={disabledCall}
-        />
+        >
+          s
+        </button>
         <button
           className={styles.buttonHangUp}
           style={hangUpIMG}
+          type="button"
           onClick={onClickHandlerHandUp}
           disabled={disabledHangup}
-        />
+        >
+          r
+        </button>
       </div>
 
       <div className={styles.statsContainer}>
         <div className={styles.callsBlock}>
-          {calls.map(call => (
+          {calls.map(c => (
             <Call
-              key={call.id}
-              id={call.id}
-              data={call.data}
-              startTime={call.startTime}
-              endTime={call.endTime}
-              duration={call.duration}
+              key={c.id}
+              id={c.id}
+              data={c.data}
+              startTime={c.startTime}
+              endTime={c.endTime}
+              duration={c.duration}
               disabled={disabledCall}
               removeCallCallback={removeCall}
             />

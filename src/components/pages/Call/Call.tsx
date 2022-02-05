@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { converter } from '../../../utils/converter';
+
 import styles from './Call.module.scss';
 
 type StatisticsType = {
@@ -21,26 +23,31 @@ export const Call: React.FC<StatisticsType> = ({
   disabled,
   removeCallCallback,
 }) => {
-  const onClickHandler = () => {
+  const onClickHandler = (): any => {
     removeCallCallback(id);
   };
 
   // helper function
   const time = converter(duration);
 
-  const endTimeMod = endTime === 0 ? `${endTime}0:${endTime}0:${endTime}0` : endTime;
+  const timeNull = 0;
+  const endTimeMod =
+    endTime === timeNull ? `${endTime}0:${endTime}0:${endTime}0` : endTime;
   const durationMod = `${time.hoursEdit}: ${time.minutesEdit}: ${time.secondsEdit}`;
   return (
-    <>
-      <div className={styles.callContainer} key={id}>
-        <span className={styles.span}> Date: {data}</span>
-        <span className={styles.span}> Start time: {startTime}</span>
-        <span className={styles.span}> End time: {endTimeMod}</span>
-        <span className={styles.span}> Duration: {durationMod}</span>
-        <button className={styles.button} onClick={onClickHandler} disabled={disabled}>
-          ×
-        </button>
-      </div>
-    </>
+    <div className={styles.callContainer} key={id}>
+      <span className={styles.span}> Date: {data}</span>
+      <span className={styles.span}> Start time: {startTime}</span>
+      <span className={styles.span}> End time: {endTimeMod}</span>
+      <span className={styles.span}> Duration: {durationMod}</span>
+      <button
+        type="button"
+        className={styles.button}
+        onClick={onClickHandler}
+        disabled={disabled}
+      >
+        ×
+      </button>
+    </div>
   );
 };
